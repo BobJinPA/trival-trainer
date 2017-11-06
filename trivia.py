@@ -42,8 +42,9 @@ def train(number):
 
 @app.route('/summary')
 def summary():
-    data = playlist.data
-    return render_template('summary.html', data=data)
+    # data = playlist.data
+    # return render_template('summary.html', data=data)
+    return render_template('summary.html')
 
 
 # @app.route('/list')
