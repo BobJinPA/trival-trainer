@@ -24,9 +24,12 @@
         <p class='lead'>Answer questions about song # {{ number}}</p>
         <p class='lead'>Artist: <input type="text" name="artist"><br></p>
         <p class='lead'>Title:  <input type="text" name="title"><br></p>
-        <p>{{ data['tracks'][number-1]['artist_name']}}</p>
-        <p>{{ data['tracks'][number-1]['song_name']}}</p>
+        {% if level=='training': %}
+            <p>Artist Name: {{ data['tracks'][number-1]['artist_name']}}</p>
+            <p>Song Title: {{ data['tracks'][number-1]['song_name']}}</p>
+        {% endif %}
         <a class="btn btn-lg btn-success" href="#" role="button">Next</a>
+
     </div>
     </body>
 </html>

@@ -20,13 +20,21 @@
         <div class="jumbotron">
         <h1 class="display-3">Trivia Trainer</h1>
         </div>
+        <form action="/start" method="post">
         <p class='lead'>Select a playlist</p>
-        <select>
+        <select name="playlist">
             {% for item in data['list'] %}
             <option value= {{ item.id}}>{{item.name}}</option>
             {% endfor %}
         </select>
-        <a class="btn btn-lg btn-success" href="/train" role="button">Start Training</a>
+        <p></p>
+        <p class='lead'>Select a Level</p>
+            <input type="radio" name="level" value="training"  checked="checked" > Training<br>
+            <input type="radio" name="level" value="competition"> Competition<br>
+          <div>
+            <button class="btn btn-lg btn-success" >Start Training</button>
+          </div>
+        </form>
         </div>
     </body>
 </html>

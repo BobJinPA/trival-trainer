@@ -15,9 +15,11 @@ def form():
     data['list'] = playlist['items']
     return render_template('index.html', data=data)
 
-
-@app.route('/start/<playlist_id>', methods=['POST'])
-def start(playlist_id):
+@app.route('/start', methods=['POST'])
+def start():
+    # playlist_id = '1KDQUm30fCPeLncWxFVfJz'
+    playlist_id = request.form['playlist']
+    level = request.form['level']
     tracks = spotapi.spotify.user_playlist_tracks(spotapi.user_id, playlist_id)
     data = {}
     data['playlist_id'] = playlist_id
@@ -33,7 +35,26 @@ def start(playlist_id):
     data['tracks'] = track_collection
     shuffle(data['tracks'])
     playlist.save_playlist(data)
-    return render_template('train.html', data=playlist.data, number=1)
+    return render_template('train.html', data=playlist.data, number=1, level=level)
+
+# @app.route('/start/<playlist_id>', methods=['POST'])
+# def start(playlist_id):
+#     tracks = spotapi.spotify.user_playlist_tracks(spotapi.user_id, playlist_id)
+#     data = {}
+#     data['playlist_id'] = playlist_id
+#     track_collection = []
+#     for track in tracks['items']:
+#         track_info = {}
+#         track_info['song_name'] = track['track']['name']
+#         track_info['song_id'] = track['track']['id']
+#         track_info['artist_name'] = track['track']['artists'][0]['name']
+#         track_info['preview'] = track['track']['preview_url']
+#         if track_info['preview'] != None:
+#             track_collection.append(track_info)
+#     data['tracks'] = track_collection
+#     shuffle(data['tracks'])
+#     playlist.save_playlist(data)
+#     return render_template('train.html', data=playlist.data, number=1)
 
 @app.route('/train/<number>', methods=['POST'])
 def train(number):
