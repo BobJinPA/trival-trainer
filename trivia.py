@@ -59,7 +59,7 @@ def start():
 @app.route('/train/<number>', methods=['POST'])
 def train(number):
 
-    return render_template('train.html', data=playlist.data, number=number)
+    return render_template('train.html', data=playlist.data, number=number, level=level)
 
 @app.route('/summary')
 def summary():
